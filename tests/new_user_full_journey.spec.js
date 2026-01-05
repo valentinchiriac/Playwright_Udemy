@@ -6,6 +6,7 @@ import { LoginPage } from "./../page-objects/LoginPage.js";
 import { RegisterPage } from "./../page-objects/RegisterPage.js";
 import { v4 as uuidv4 } from 'uuid';
 import { DeliveryDetailsPage } from "./../page-objects/DeliveryDetailsPage.js"
+import { deliveryDetails } from "./../data/deliveryDetails.js";
 
 test.only("New user full E2E test journey", async ({ page }) => {
   const productsPage = new ProductsPage(page);
@@ -29,5 +30,10 @@ test.only("New user full E2E test journey", async ({ page }) => {
   await registerPage.signUpNewUser(email, password)
 
   const deliveryDetailsPage = new DeliveryDetailsPage(page)
-  await deliveryDetailsPage.fillDetails()
+  await deliveryDetailsPage.fillDetails(deliveryDetails)
+  //saving the details of the user
+  await deliveryDetailsPage.saveDetails()
+
+  //press Continue to Payment
+  await deliveryDetailsPage.continueButton.click()
 });
