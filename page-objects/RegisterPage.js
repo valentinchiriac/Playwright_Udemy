@@ -23,6 +23,6 @@ export class RegisterPage {
     //click submit button
     await this.registerButton.waitFor()
     await this.registerButton.click()
-    await this.page.pause()
+    //await this.page.pause()
   }
 }
