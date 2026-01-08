@@ -7,6 +7,8 @@ import { RegisterPage } from "./../page-objects/RegisterPage.js";
 import { v4 as uuidv4 } from 'uuid';
 import { DeliveryDetailsPage } from "./../page-objects/DeliveryDetailsPage.js"
 import { deliveryDetails } from "./../data/deliveryDetails.js";
+import { PaymentPage } from "./../page-objects/PaymentPage.js";
+import { paymentDetails } from "./../data/paymentDetails.js";
 
 test.only("New user full E2E test journey", async ({ page }) => {
   const productsPage = new ProductsPage(page);
@@ -36,4 +38,9 @@ test.only("New user full E2E test journey", async ({ page }) => {
 
   //press Continue to Payment
   await deliveryDetailsPage.continueButton.click()
+
+  //a new object for Payment Page and access to IFrame
+  const paymentPage = new PaymentPage(page)
+  await paymentPage.activateDiscount()
+  await paymentPage.fillPaymentDetails(paymentDetails)
 });
