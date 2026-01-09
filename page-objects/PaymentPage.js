@@ -23,6 +23,8 @@ export class PaymentPage {
     this.creditCardNumberField = page.locator('[data-qa="credit-card-number"]')
     this.validUntillField = page.locator('[data-qa="valid-until"]')
     this.creditCardCVVField = page.locator('[data-qa="credit-card-cvc"]')
+
+    this.payButton = page.locator('[data-qa="pay-button"]')
   }
 
   activateDiscount = async () => {
@@ -75,7 +77,14 @@ export class PaymentPage {
     await this.validUntillField.fill(paymentDetails.validUntill)
     await this.creditCardCVVField.waitFor()
     await this.creditCardCVVField.fill(paymentDetails.creditCardCVV)
-    await this.page.pause()
+    //await this.page.pause()
     
+  }
+
+  //create method for complete Payment used in the E2E
+  completePayment = async () => {
+    await this.payButton.waitFor()
+    await this.payButton.click()
+    await this.page.waitForURL(/\/thank-you/, {timeout: 3000})
   }
 }

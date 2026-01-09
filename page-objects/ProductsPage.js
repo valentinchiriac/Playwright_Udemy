@@ -1,6 +1,12 @@
 import {expect} from "@playwright/test"
-
 import { Navigation } from "./Navigation.js"
+import { isDesktopViewport } from "./../utils/isDesktopViewport.js"
+
+//function to return true or false if desktop view > now moved to utils.isDesktopViewport.js file
+// const isDesktopViewport = (page) => {
+//     const size = page.viewportSize()
+//     return size.width >= 800
+// }
 
 export class ProductsPage {
     //a class is a collection of methods, functions
@@ -30,11 +36,19 @@ export class ProductsPage {
         // await specificAddButton
         await expect(specificAddButton).toHaveText("Add to Basket")
         const navigation = new Navigation(this.page)
-        const basketCountBeforeAdding = await navigation.getBasketCount()
+        //the below is only used in desktop viewport so moving into an if statement
+        let basketCountBeforeAdding
+        if (isDesktopViewport(this.page)) {
+            basketCountBeforeAdding = await navigation.getBasketCount()
+        }
         await specificAddButton.click()
         await expect(specificAddButton).toHaveText("Remove from Basket")
-        const basketCountAfterAdding = await navigation.getBasketCount()
-        expect(basketCountAfterAdding).toBe(basketCountBeforeAdding + 1)
+         //the below is only used in desktop viewport so moving into an if statement
+         if (isDesktopViewport(this.page)) {
+            const basketCountAfterAdding = await navigation.getBasketCount()
+            expect(basketCountAfterAdding).toBe(basketCountBeforeAdding + 1)     
+         }
+       
     }
 
     sortByCheapest = async () => {
