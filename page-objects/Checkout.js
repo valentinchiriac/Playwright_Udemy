@@ -23,6 +23,7 @@ export class Checkout {
         return parseInt(withoutDollarSign, 10)
     })
     const smallestPrice = Math.min(...justNumbers)
+    //... este Spread Operator, ajuta la "desfacerea" unui array in elemente separate
     const smallestPriceIndex = justNumbers.indexOf(smallestPrice)
     const specificRemovebutton = this.basketItemRemoveButton.nth(smallestPriceIndex)
     await specificRemovebutton.waitFor()
