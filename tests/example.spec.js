@@ -1,7 +1,7 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
-test.skip('homepage has title and links to intro page', async ({ page }) => {
+test('homepage has title and links to intro page', async ({ page }) => {
   await page.goto('https://playwright.dev/');
 
   // Expect a title "to contain" a substring.
@@ -22,7 +22,7 @@ test.skip('homepage has title and links to intro page', async ({ page }) => {
   await page.pause()
 });
 
-test.skip('al doilea test', async ({ page }) => {
+test('al doilea test', async ({ page }) => {
   await page.goto('https://playwright.dev/');
 
   // Expect a title "to contain" a substring.

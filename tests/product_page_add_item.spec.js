@@ -1,6 +1,6 @@
 import {test, expect} from "@playwright/test"
 
-test.skip ("Product Page Add to Basket", async({page}) => {
+test ("Product Page Add to Basket", async({page}) => {
     await page.goto("/")
 
     //getByRole nu este foarte de ajutor in acest caz
