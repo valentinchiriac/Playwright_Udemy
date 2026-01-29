@@ -1,6 +1,7 @@
 import {expect} from "@playwright/test"
 import { Navigation } from "./Navigation.js"
 import { isDesktopViewport } from "./../utils/isDesktopViewport.js"
+import { BasePage } from "./BasePage.js"
 
 //function to return true or false if desktop view > now moved to utils.isDesktopViewport.js file
 // const isDesktopViewport = (page) => {
@@ -8,10 +9,10 @@ import { isDesktopViewport } from "./../utils/isDesktopViewport.js"
 //     return size.width >= 800
 // }
 
-export class ProductsPage {
+export class ProductsPage extends BasePage {
     //a class is a collection of methods, functions
     constructor(page){
-        this.page = page
+        super(page)
 
         //locator pentru butonul de "add product to basket"
         this.addButtons = page.locator('[data-qa="product-button"]')
@@ -27,6 +28,7 @@ export class ProductsPage {
 
     visit = async ()=>{
         await this.page.goto("/")
+        await this.waitForPageLoad()
     }
 
     addProductToBasket = async (index) => {

@@ -1,6 +1,8 @@
-export class LoginPage{
+import { BasePage } from "./BasePage.js"
+
+export class LoginPage extends BasePage{
     constructor(page){
-        this.page = page
+        super(page)
 
         //locator for Register button
         this.moveToSignupButton = page.locator('[data-qa="go-to-signup-button"]')
