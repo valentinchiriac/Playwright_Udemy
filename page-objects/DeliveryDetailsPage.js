@@ -1,8 +1,10 @@
-import { expect } from "@playwright/test"
 
-export class DeliveryDetailsPage{
+import { expect } from "@playwright/test"
+import { BasePage } from "./BasePage.js"
+
+export class DeliveryDetailsPage extends BasePage{
     constructor(page){
-        this.page = page
+        super(page)
 
         this.firstNameInput = page.getByRole('textbox', { name: 'First name' })
         this.lastNameInput = page.getByRole('textbox', { name: 'Last name' })
@@ -27,7 +29,6 @@ export class DeliveryDetailsPage{
     }
 
     fillDetails = async (deliveryDetails) => {
-        await this.page.pause()
         await this.firstNameInput.waitFor()
         await this.firstNameInput.fill(deliveryDetails.firstName)
         await this.lastNameInput.waitFor()
@@ -78,6 +79,5 @@ export class DeliveryDetailsPage{
         await this.continueToPaymentButton.waitFor()
         await this.continueToPaymentButton.click()
         await this.page.waitForURL(/\/payment/,{ timeout: 3000 })
-        //await this.page.pause()
     }
 }
